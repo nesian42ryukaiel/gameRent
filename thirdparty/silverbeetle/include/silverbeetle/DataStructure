@@ -1,0 +1,16 @@
+//
+//  DataStructure.hpp
+//  silverbeetle
+//
+//  Created by 유기하 on 2021/03/17.
+//
+
+#ifndef DataStructure_h
+#define DataStructure_h
+
+#include "Node.hpp"
+#include "List.hpp"
+#include "Queue.hpp"
+#include "Stack.hpp"
+
+#endif /* DataStructure_h */
