@@ -245,6 +245,7 @@
 		034B16D426022A8F00B13C82 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6RR5M4V5WP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -260,6 +261,7 @@
 		034B16D526022A8F00B13C82 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6RR5M4V5WP;
 				ENABLE_HARDENED_RUNTIME = YES;

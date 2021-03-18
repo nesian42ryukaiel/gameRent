@@ -9,8 +9,21 @@
 #define App_hpp
 
 #include <stdio.h>
+#include <filesystem>
+#include <silverbeetle/DataStructure>
 
 class App {
+public:
+    App();
+    ~App();
+    
+protected:
+    
+    
+private:
+    libsb::List* mCustomer;
+    libsb::List* mGame;
+    libsb::List* mRent;
     
 };
 

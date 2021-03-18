@@ -6,3 +6,9 @@
 //
 
 #include "App.hpp"
+
+App::App():
+mCustomer(nullptr), mGame(nullptr), mRent(nullptr)
+{
+    
+}
