@@ -7,8 +7,27 @@
 
 #include "App.hpp"
 
+App* App::instance = nullptr;
+
+App* App::getInstance() {
+    if (instance == nullptr) {
+        instance = new App();
+    }
+    
+    return instance;
+}
+
 App::App():
-mCustomer(nullptr), mGame(nullptr), mRent(nullptr)
+mCustomer(nullptr), mGame(nullptr) // , mRent(nullptr)
 {
+    std::cout << "Zoom\n" << std::endl;
+}
+
+App::~App() {
+    std::cout << "pooF\n" << std::endl;
+    if (instance != nullptr) {
+        delete instance;
+        instance = nullptr;
+    }
     
 }

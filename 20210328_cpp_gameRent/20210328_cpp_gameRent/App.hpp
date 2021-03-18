@@ -14,16 +14,20 @@
 
 class App {
 public:
-    App();
-    ~App();
+    static App* getInstance();
     
 protected:
     
     
 private:
+    App();
+    ~App();
+    
     libsb::List* mCustomer;
     libsb::List* mGame;
-    libsb::List* mRent;
+    // libsb::List* mRent;
+    
+    static App* instance;
     
 };
 

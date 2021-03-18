@@ -7,10 +7,18 @@
 
 #include <iostream>
 #include <silverbeetle/DataStructure>
+#include "App.hpp"
 
 int main(int argc, const char * argv[]) {
+    App* session = App::getInstance(); // singleton을 써봄
+    
     libsb::List* testList = new libsb::List();
     
+    libsb::Node testNode;
+    testNode.mIsHuman = true;
+    
     delete testList;
+    
+    // delete session;
     return 0;
 }

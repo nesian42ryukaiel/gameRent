@@ -22,6 +22,8 @@ public:
     
     std::string mName; // 이름
     unsigned int mID; // 전화번호
+    bool mIsHuman;
+    unsigned int mIsOnRent;
     struct Node* prev;
     struct Node* next;
     
