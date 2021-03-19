@@ -17,6 +17,18 @@ App* App::getInstance() {
     return instance;
 }
 
+void App::routine() {
+    std::cout << "Initializing";
+    sleep(1);
+    std::cout << ".";
+    sleep(1);
+    std::cout << ".";
+    sleep(1);
+    std::cout << "." << std::endl;
+    sleep(1);
+    
+}
+
 App::App():
 mCustomer(nullptr), mGame(nullptr) // , mRent(nullptr)
 {
