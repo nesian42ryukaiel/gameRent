@@ -18,6 +18,9 @@ App* App::getInstance() {
 }
 
 void App::routine() {
+    loadCustomer(); // 고객 정보 로드
+    // 게임 정보 로드
+    
     std::cout << "Initializing";
     sleep(1);
     std::cout << ".";
@@ -27,7 +30,106 @@ void App::routine() {
     std::cout << "." << std::endl;
     sleep(1);
     
+    // 메인 루프
+    while (true) {
+        std::cout << "/===============\\" << std::endl;
+        std::cout << "|GAME STORE RENT|" << std::endl;
+        std::cout << "\\===============/" << std::endl;
+        sleep(1);
+        
+        break;
+    }
+    
+    saveCustomer(); // 고객 정보 저장
+    // 게임 정보 저장
 }
+
+
+void App::loadCustomer() { // 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.txt)
+    if (mCustomer == nullptr) {
+        mCustomer = new libsb::List();
+        // 여기서 로드
+        std::cout << "Customer data safely loaded." << std::endl;
+    }
+}
+
+void App::saveCustomer() { // 고객 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/customer.txt)
+    if (mCustomer != nullptr) {
+        // 여기서 저장
+        std::cout << "Customer data safely stored." << std::endl;
+        delete mCustomer;
+    }
+}
+
+void App::addCustomer() {  // 고객 정보 입력 (신규)
+    if (mCustomer != nullptr) {
+        // 여기서 타이핑
+        mCustomer->push_back(108, "Buddha");
+    }
+}
+
+void App::findCustomerName() {  // 고객 정보 검색 (이름)
+    if (mCustomer != nullptr) {
+        
+    }
+}
+
+void App::findCustomerID() {  // 고객 정보 검색 (전화번호)
+    if (mCustomer != nullptr) {
+        
+    }
+}
+
+void App::viewCustomer() { // 고객 정보 조회 ()
+    if (mCustomer != nullptr) {
+        
+    }
+}
+
+void App::offCustomer() { // 고객 정보 삭제 (탈퇴)
+    if (mCustomer != nullptr) {
+        
+    }
+}
+
+
+void App::loadGame() { // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.txt)
+    
+}
+
+void App::saveGame() { // 게임 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/game.txt)
+    
+}
+
+void App::addGame() { // 게임 정보 입력 (신규)
+    
+}
+
+void App::findGameName() { // 게임 정보 검색 (이름)
+    
+}
+
+void App::findGameID() { // 게임 정보 검색 (일련번호)
+    
+}
+
+void App::viewGame() { // 게임 정보 조회 (대여 여부 등 확인)
+    
+}
+
+void App::offGame() { // 게임 정보 삭제 (매각)
+    
+}
+
+void App::rentGame() { // 게임 대여 처리
+    
+}
+
+void App::retrieveGame() { // 게임 반납 처리
+    
+}
+
+//----------------
 
 App::App():
 mCustomer(nullptr), mGame(nullptr) // , mRent(nullptr)

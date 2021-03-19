@@ -9,7 +9,8 @@
 #define App_hpp
 
 #include <stdio.h>
-#include <filesystem>
+#include <iostream>
+#include <fstream>
 #include <silverbeetle/DataStructure>
 #include "unistd.h"
 
@@ -19,23 +20,23 @@ public:
     
     void routine();
     
-    // 고객 정보 로드 (from customer.txt)
-    // 고객 정보 저장 ( to  customer.txt)
-    // 고객 정보 입력 (신규)
-    // 고객 정보 검색 (이름)
-    // 고객 정보 검색 (전화번호)
-    // 고객 정보 조회 ()
-    // 고객 정보 삭제 (탈퇴)
+    void loadCustomer();// 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.txt)
+    void saveCustomer();// 고객 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/customer.txt)
+    void addCustomer(); // 고객 정보 입력 (신규)
+    void findCustomerName(); // 고객 정보 검색 (이름)
+    void findCustomerID(); // 고객 정보 검색 (전화번호)
+    void viewCustomer(); // 고객 정보 조회 ()
+    void offCustomer();// 고객 정보 삭제 (탈퇴)
     
-    // 게임 정보 로드 (from game.txt)
-    // 게임 정보 저장 ( to  game.txt)
-    // 게임 정보 입력 (신규)
-    // 게임 정보 검색 (이름)
-    // 게임 정보 검색 (일련번호)
-    // 게임 정보 조회 (대여 여부 등 확인)
-    // 게임 정보 삭제 (매각)
-    // 게임 대여 처리
-    // 게임 반납 처리
+    void loadGame(); // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.txt)
+    void saveGame(); // 게임 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/game.txt)
+    void addGame(); // 게임 정보 입력 (신규)
+    void findGameName(); // 게임 정보 검색 (이름)
+    void findGameID(); // 게임 정보 검색 (일련번호)
+    void viewGame(); // 게임 정보 조회 (대여 여부 등 확인)
+    void offGame(); // 게임 정보 삭제 (매각)
+    void rentGame(); // 게임 대여 처리
+    void retrieveGame();// 게임 반납 처리
     
 protected:
     

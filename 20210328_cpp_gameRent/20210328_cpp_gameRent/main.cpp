@@ -11,15 +11,15 @@
 int main(int argc, const char * argv[]) {
     App* session = App::getInstance(); // singleton을 써봄
     
-    libsb::List* testList = new libsb::List();
-    
     session->routine();
     
-    libsb::Node testNode;
-    testNode.mIsHuman = true;
+    // libsb::Node testNode;
+    // testNode.mIsHuman = true;
+    // std::cout << testNode.mIsHuman << std::endl;
     
-    delete testList;
+    // libsb::List* testList = new libsb::List();
+    // delete testList;
     
-    // delete session;
+    // delete session; 싱글턴 사용 시 이건 사용 안 함
     return 0;
 }
