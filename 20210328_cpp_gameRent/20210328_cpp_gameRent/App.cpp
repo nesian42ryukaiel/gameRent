@@ -21,14 +21,14 @@ void App::routine() {
     loadCustomer(); // 고객 정보 로드
     // 게임 정보 로드
     
-    std::cout << "Initializing";
-    sleep(1);
-    std::cout << ".";
-    sleep(1);
-    std::cout << ".";
-    sleep(1);
-    std::cout << ".\n" << std::endl;
-    sleep(1);
+//    std::cout << "Initializing";
+//    sleep(1);
+//    std::cout << ".";
+//    sleep(1);
+//    std::cout << ".";
+//    sleep(1);
+//    std::cout << ".\n" << std::endl;
+//    sleep(1);
     
     // 메인 루프
     while (true) {
