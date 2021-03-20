@@ -12,6 +12,7 @@
 #include <iostream>
 #include <fstream>
 #include <silverbeetle/DataStructure>
+#include "rapidjson/document.h" // JSON 파일 저장/로드용 유명 파싱 기능 라이브러리
 #include "unistd.h"
 
 class App {

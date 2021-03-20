@@ -249,7 +249,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6RR5M4V5WP;
 				ENABLE_HARDENED_RUNTIME = YES;
-				HEADER_SEARCH_PATHS = "$(PROJECT_THIRDPARTY_DIR)/silverbeetle/include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_THIRDPARTY_DIR)/silverbeetle/include",
+					"$(PROJECT_THIRDPARTY_DIR)/rapidjson/include",
+				);
 				LD_RUNPATH_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_THIRDPARTY_DIR)/silverbeetle/lib";
 				OTHER_LDFLAGS = "-lsilverbeetle";
@@ -265,7 +268,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6RR5M4V5WP;
 				ENABLE_HARDENED_RUNTIME = YES;
-				HEADER_SEARCH_PATHS = "$(PROJECT_THIRDPARTY_DIR)/silverbeetle/include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_THIRDPARTY_DIR)/silverbeetle/include",
+					"$(PROJECT_THIRDPARTY_DIR)/rapidjson/include",
+				);
 				LD_RUNPATH_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_THIRDPARTY_DIR)/silverbeetle/lib";
 				OTHER_LDFLAGS = "-lsilverbeetle";

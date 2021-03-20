@@ -91,12 +91,16 @@ void App::findCustomerID() {  // 고객 정보 검색 (전화번호)
 
 void App::viewCustomer() { // 고객 정보 조회 ()
     if (mCustomer != nullptr) {
-        
+        // 인간일 경우만
+        // 고객의 이름과 전화번호를 print
+        // 그리고 해당 고객이 빌린 모든 게임들을 게재
     }
 }
 
 void App::offCustomer() { // 고객 정보 삭제 (탈퇴)
     if (mCustomer != nullptr) {
+        // 인간일 경우만
+        // 고객 정보 노드 삭제
         
     }
 }
