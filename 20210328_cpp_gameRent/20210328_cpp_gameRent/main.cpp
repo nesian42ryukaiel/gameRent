@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "App.hpp"
+#include <vector>
 
 int main(int argc, const char * argv[]) {
     App* session = App::getInstance(); // singleton을 써봄
@@ -21,5 +22,7 @@ int main(int argc, const char * argv[]) {
     // delete testList;
     
     // delete session; 싱글턴 사용 시 이건 사용 안 함
+    
+    
     return 0;
 }
