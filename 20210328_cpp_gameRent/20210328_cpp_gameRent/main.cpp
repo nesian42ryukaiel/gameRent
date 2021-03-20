@@ -7,22 +7,37 @@
 
 #include <iostream>
 #include "App.hpp"
-#include <vector>
+// 이하 RapidJSON 테스트용 헤더들 명시
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+
+using namespace libsb;
 
 int main(int argc, const char * argv[]) {
     App* session = App::getInstance(); // singleton을 써봄
     
     session->routine();
     
-    // libsb::Node testNode;
-    // testNode.mIsHuman = true;
-    // std::cout << testNode.mIsHuman << std::endl;
-    
-    // libsb::List* testList = new libsb::List();
-    // delete testList;
-    
     // delete session; 싱글턴 사용 시 이건 사용 안 함
     
+    // 1. Parse a JSON string into DOM.
+    const char* json = "{\"project\":\"rapidjson\",\"stars\":10}";
+    rapidjson::Document d;
+    d.Parse(json);
+ 
+    // 2. Modify it by DOM.
+    rapidjson::Value& s = d["stars"];
+    s.SetInt(s.GetInt() + 1);
+ 
+    // 3. Stringify the DOM
+    rapidjson::StringBuffer buffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+    d.Accept(writer);
+ 
+    // Output {"project":"rapidjson","stars":11}
+    std::cout << buffer.GetString() << std::endl << std::endl;
+    return 0;
     
     return 0;
 }
