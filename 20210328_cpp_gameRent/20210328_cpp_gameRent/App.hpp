@@ -13,7 +13,7 @@
 #include <fstream>
 #include <silverbeetle/DataStructure>
 #include <rapidjson/RapidJsonUsing>
-#include "rapidjson/document.h" // JSON 파일 저장/로드용 유명 파싱 기능 라이브러리
+// #include "rapidjson/document.h" // JSON 파일 저장/로드용 유명 파싱 기능 라이브러리
 #include "unistd.h"
 
 class App {
@@ -22,16 +22,16 @@ public:
     
     void routine();
     
-    void loadCustomer();// 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.txt)
-    void saveCustomer();// 고객 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/customer.txt)
+    void loadCustomer();// 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.json)
+    void saveCustomer();// 고객 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/customer.json)
     void addCustomer(); // 고객 정보 입력 (신규)
     void findCustomerName(); // 고객 정보 검색 (이름)
     void findCustomerID(); // 고객 정보 검색 (전화번호)
     void viewCustomer(); // 고객 정보 조회 ()
     void offCustomer();// 고객 정보 삭제 (탈퇴)
     
-    void loadGame(); // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.txt)
-    void saveGame(); // 게임 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/game.txt)
+    void loadGame(); // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.json)
+    void saveGame(); // 게임 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/game.json)
     void addGame(); // 게임 정보 입력 (신규)
     void findGameName(); // 게임 정보 검색 (이름)
     void findGameID(); // 게임 정보 검색 (일련번호)

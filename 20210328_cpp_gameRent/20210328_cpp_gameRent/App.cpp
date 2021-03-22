@@ -18,6 +18,12 @@ App* App::getInstance() {
 }
 
 void App::routine() {
+    char control = NULL;
+    unsigned int id = 0;
+    std::string name;
+    bool human = false;
+    unsigned int rent = 0;
+    
     loadCustomer(); // 고객 정보 로드
     loadGame(); // 게임 정보 로드
     
@@ -35,16 +41,36 @@ void App::routine() {
         std::cout << "/===============\\" << std::endl;
         std::cout << "|GAME STORE RENT|" << std::endl;
         std::cout << "\\===============/\n" << std::endl;
-        sleep(1);
+        // sleep(1);
+        
+        std::cout << "Press C/c to handle Customer data." <<std::endl;
+        std::cout << "Press G/g to handle   Game   data." <<std::endl;
+        std::cout << "Press R/r to handle  Rental  data.\n" <<std::endl;
+        std::cout << "Press Q/q to quit this session.\n" <<std::endl;
+        
+        std::cin >> control;
+        if (control == 'C' || control == 'c') {
+            control = NULL;
+            std::cout << "\nCustomer Mode\n" <<std::endl;
+        } else if (control == 'G' || control == 'g') {
+            control = NULL;
+            std::cout << "\nGame Mode\n" <<std::endl;
+        } else if (control == 'R' || control == 'r') {
+            control = NULL;
+            std::cout << "\nRental Mode\n" <<std::endl;
+        } else if (control == 'Q' || control == 'q') {
+            control = NULL;
+            break;
+        }
         
         findCustomerName();
         addCustomer();
         addCustomer();
         findCustomerID();
         mCustomer->print(0);
-        sleep(1);
+        // sleep(1);
         
-        break;
+        // break;
     }
     
     saveCustomer(); // 고객 정보 저장
@@ -52,7 +78,7 @@ void App::routine() {
 }
 
 
-void App::loadCustomer() { // 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.txt)
+void App::loadCustomer() { // 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.json)
     if (mCustomer == nullptr) {
         mCustomer = new libsb::List();
         // 여기서 로드
@@ -76,7 +102,7 @@ void App::loadCustomer() { // 고객 정보 로드 (from /Users/lvcrivca/repo/ga
     }
 }
 
-void App::saveCustomer() { // 고객 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/customer.txt)
+void App::saveCustomer() { // 고객 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/customer.json)
     if (mCustomer != nullptr) {
         // 여기서 저장
         rapidjson::Document document;
@@ -120,7 +146,7 @@ void App::saveCustomer() { // 고객 정보 저장 ( to  /Users/lvcrivca/repo/ga
 void App::addCustomer() {  // 고객 정보 입력 (신규)
     if (mCustomer != nullptr) {
         // 여기서 타이핑; 이름과 전화번호 둘 다 중복이면 거부
-        // mCustomer->push_back(108, "Buddha", true, 0);
+        // mCustomer->push_back(id, name, true, 0);
     }
 }
 
@@ -155,7 +181,7 @@ void App::offCustomer() { // 고객 정보 삭제 (탈퇴)
 }
 
 
-void App::loadGame() { // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.txt)
+void App::loadGame() { // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.json)
     if (mGame == nullptr) {
         mGame = new libsb::List();
         // 여기서 로드
@@ -179,7 +205,7 @@ void App::loadGame() { // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRe
     }
 }
 
-void App::saveGame() { // 게임 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/game.txt)
+void App::saveGame() { // 게임 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/game.json)
     if (mGame != nullptr) {
         rapidjson::Document document;
         document.SetArray();
@@ -214,7 +240,7 @@ void App::saveGame() { // 게임 정보 저장 ( to  /Users/lvcrivca/repo/gameRe
         
         fclose(fp);
         
-        std::cout << "[DEBUG_M]: Customer data safely stored.\n" << std::endl;
+        std::cout << "[DEBUG_M]: Game data safely stored.\n" << std::endl;
         delete mGame;
     }
 }
