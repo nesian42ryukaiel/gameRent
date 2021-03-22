@@ -21,17 +21,19 @@ public:
     ~List();
     
     void clear();
-    void insert(Node* position, unsigned int id, std::string name);
-    void push_front(unsigned int id, std::string name);
-    void push_back(unsigned int id, std::string name);
+    void insert(Node* position, unsigned int id, std::string name, bool human, unsigned int rent);
+    void push_front(unsigned int id, std::string name, bool human, unsigned int rent);
+    void push_back(unsigned int id, std::string name, bool human, unsigned int rent);
     void pop_front();
     void pop_back();
     void remove(Node* position);
-    Node* findName(std::string name);
     Node* findID(unsigned int id);
+    Node* findName(std::string name);
     unsigned int size();
     bool empty();
     void print(bool inverse);
+    Node* getHead();
+    Node* getTail();
     
 private:
     Node* head;

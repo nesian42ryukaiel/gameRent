@@ -21,7 +21,7 @@ public:
     ~Queue();
     
     void clear();
-    void push(unsigned int id, std::string name);
+    void push(unsigned int id, std::string name, bool human, unsigned int rent);
     void pop();
     unsigned int frontID();
     std::string frontName();
@@ -30,6 +30,8 @@ public:
     unsigned int size();
     bool empty();
     void print(bool inverse);
+    Node* getFront();
+    Node* getBack();
     
 private:
     Node* front;

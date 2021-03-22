@@ -21,13 +21,14 @@ public:
     ~Stack();
     
     void clear();
-    void push(unsigned int id, std::string name);
+    void push(unsigned int id, std::string name, bool human, unsigned int rent);
     void pop();
     unsigned int topID();
     std::string topName();
     unsigned int size();
     bool empty();
     void print();
+    Node* getTop();
     
 private:
     Node* top;

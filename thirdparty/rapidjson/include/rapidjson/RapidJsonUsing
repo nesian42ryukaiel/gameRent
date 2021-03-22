@@ -1,0 +1,19 @@
+//
+//  RapidJsonUsing.h
+//  20210320_cpp_parsingJSON
+//
+//  Created by 유기하 on 2021/03/22.
+//
+
+#ifndef RapidJsonUsing_h
+#define RapidJsonUsing_h
+
+#include <rapidjson/document.h>
+#include <rapidjson/filereadstream.h>
+#include <rapidjson/istreamwrapper.h>
+#include <rapidjson/writer.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/filewritestream.h>
+#include <rapidjson/ostreamwrapper.h>
+
+#endif /* RapidJsonUsing_h */
