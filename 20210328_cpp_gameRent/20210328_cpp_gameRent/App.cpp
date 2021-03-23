@@ -21,6 +21,7 @@ void App::routine() {
     char control = NULL;
     unsigned int id = 0;
     std::string name;
+    libsb::Node* search = nullptr;
     bool human = false;
     unsigned int rent = 0;
     
@@ -55,38 +56,61 @@ void App::routine() {
             std::cout << "\nCustomer Mode\n" <<std::endl;
             
             std::cout << "Press A/a to add Customer data." <<std::endl;
-            std::cout << "Press S/s to show Customer data." <<std::endl;
+            std::cout << "Press S/s to search Customer data." <<std::endl;
             std::cout << "Press U/u to unsign Customer data.\n" <<std::endl;
             std::cout << "Press anything else to exit this mode.\n" <<std::endl;
             
             std::cout << "CM >> ";
             control = NULL;
             std::cin >> control;
+            std::cin.ignore(); // 다 치고 마지막 줄바꿈 문자 무시하는 데 사용!
             if (control == 'A' || control == 'a') {
                 std::cout << "Checking new phone number >> ";
                 id = 0;
                 std::cin >> id;
+                std::cin.ignore();
                 if (findCustomerID(id) == nullptr && id != 0) {
                     std::cout << "New customer; Enter name >> ";
                     name.clear();
-                    std::getline(std::cin, name); // 화이트스페이스 포함한 string 넣을 때
-                    if (findCustomerID(id)->mName != name) {
-                        addCustomer(id, name);
-                        id = 0;
-                        name.clear();
-                    } else {
-                        std::cout << "Existing customer.\n" << std::endl;
-                        id = 0;
-                        name.clear();
-                    }
+                    // std::cin >> name;
+                    std::getline(std::cin, name); // 화이트스페이스 포함한 string 넣을 때; 바로 위 줄바꿈 ignore 필수
+                    addCustomer(id, name);
+                    id = 0;
+                    name.clear();
                 } else {
                     std::cout << "Existing phone number.\n" << std::endl;
                     id = 0;
                 }
             } else if (control == 'S' || control == 's') {
-                
+                std::cout << "Searching extant phone number >> ";
+                id = 0;
+                std::cin >> id;
+                std::cin.ignore();
+                if (findCustomerID(id) != nullptr && id != 0) {
+                    search = findCustomerID(id);
+                    std::cout << "[" << search->mID << "] " << search->mName << "\n" << std::endl;
+                    search = nullptr;
+                    id = 0;
+                    
+                } else {
+                    std::cout << "Invalid phone number.\n" << std::endl;
+                    id = 0;
+                }
             } else if (control == 'U' || control == 'u') {
-                
+                std::cout << "Deleting extant phone number >> ";
+                id = 0;
+                std::cin >> id;
+                std::cin.ignore();
+                if (findCustomerID(id) != nullptr && id != 0) {
+                    search = findCustomerID(id);
+                    delete search;
+                    search = nullptr;
+                    id = 0;
+                    
+                } else {
+                    std::cout << "Invalid phone number.\n" << std::endl;
+                    id = 0;
+                }
             } else {
                 std::cout << "Exiting mode...\n" <<std::endl;
             }
@@ -99,6 +123,7 @@ void App::routine() {
         }
         
         mCustomer->print(0);
+        mGame->print(0);
         // sleep(1);
         
         // break;
