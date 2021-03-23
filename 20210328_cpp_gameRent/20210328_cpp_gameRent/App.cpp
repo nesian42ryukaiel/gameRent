@@ -48,25 +48,56 @@ void App::routine() {
         std::cout << "Press R/r to handle  Rental  data.\n" <<std::endl;
         std::cout << "Press Q/q to quit this session.\n" <<std::endl;
         
+        std::cout << "CM >> ";
+        control = NULL;
         std::cin >> control;
         if (control == 'C' || control == 'c') {
-            control = NULL;
             std::cout << "\nCustomer Mode\n" <<std::endl;
-        } else if (control == 'G' || control == 'g') {
+            
+            std::cout << "Press A/a to add Customer data." <<std::endl;
+            std::cout << "Press S/s to show Customer data." <<std::endl;
+            std::cout << "Press U/u to unsign Customer data.\n" <<std::endl;
+            std::cout << "Press anything else to exit this mode.\n" <<std::endl;
+            
+            std::cout << "CM >> ";
             control = NULL;
+            std::cin >> control;
+            if (control == 'A' || control == 'a') {
+                std::cout << "Checking new phone number >> ";
+                id = 0;
+                std::cin >> id;
+                if (findCustomerID(id) == nullptr && id != 0) {
+                    std::cout << "New customer; Enter name >> ";
+                    name.clear();
+                    std::getline(std::cin, name); // 화이트스페이스 포함한 string 넣을 때
+                    if (findCustomerID(id)->mName != name) {
+                        addCustomer(id, name);
+                        id = 0;
+                        name.clear();
+                    } else {
+                        std::cout << "Existing customer.\n" << std::endl;
+                        id = 0;
+                        name.clear();
+                    }
+                } else {
+                    std::cout << "Existing phone number.\n" << std::endl;
+                    id = 0;
+                }
+            } else if (control == 'S' || control == 's') {
+                
+            } else if (control == 'U' || control == 'u') {
+                
+            } else {
+                std::cout << "Exiting mode...\n" <<std::endl;
+            }
+        } else if (control == 'G' || control == 'g') {
             std::cout << "\nGame Mode\n" <<std::endl;
         } else if (control == 'R' || control == 'r') {
-            control = NULL;
             std::cout << "\nRental Mode\n" <<std::endl;
         } else if (control == 'Q' || control == 'q') {
-            control = NULL;
             break;
         }
         
-        findCustomerName();
-        addCustomer();
-        addCustomer();
-        findCustomerID();
         mCustomer->print(0);
         // sleep(1);
         
@@ -143,25 +174,29 @@ void App::saveCustomer() { // 고객 정보 저장 ( to  /Users/lvcrivca/repo/ga
     }
 }
 
-void App::addCustomer() {  // 고객 정보 입력 (신규)
+void App::addCustomer(unsigned int id, std::string name) {  // 고객 정보 입력 (신규)
     if (mCustomer != nullptr) {
         // 여기서 타이핑; 이름과 전화번호 둘 다 중복이면 거부
-        // mCustomer->push_back(id, name, true, 0);
+        mCustomer->push_back(id, name, true, 0);
     }
 }
 
-void App::findCustomerName() {  // 고객 정보 검색 (이름)
+libsb::Node* App::findCustomerName(std::string name) {  // 고객 정보 검색 (이름)
     if (mCustomer != nullptr) {
         // 여기서 타이핑
-        mCustomer->findName("Buddha"); // return을 바꿔야 하나
+        return mCustomer->findName(name); // return을 바꿔야 하나
     }
+    
+    return nullptr;
 }
 
-void App::findCustomerID() {  // 고객 정보 검색 (전화번호)
+libsb::Node* App::findCustomerID(unsigned int id) {  // 고객 정보 검색 (전화번호)
     if (mCustomer != nullptr) {
         
-        mCustomer->findID(108);
+        return mCustomer->findID(id);
     }
+    
+    return nullptr;
 }
 
 void App::viewCustomer() { // 고객 정보 조회 ()
@@ -245,22 +280,26 @@ void App::saveGame() { // 게임 정보 저장 ( to  /Users/lvcrivca/repo/gameRe
     }
 }
 
-void App::addGame() { // 게임 정보 입력 (신규)
+void App::addGame(unsigned int id, std::string name) { // 게임 정보 입력 (신규)
     if (mGame != nullptr) {
-        
+        mGame->push_back(id, name, false, 0);
     }
 }
 
-void App::findGameName() { // 게임 정보 검색 (이름)
+libsb::Node* App::findGameName(std::string name) { // 게임 정보 검색 (이름)
     if (mGame != nullptr) {
-        
+        return mGame->findName(name);
     }
+    
+    return nullptr;
 }
 
-void App::findGameID() { // 게임 정보 검색 (일련번호)
+libsb::Node* App::findGameID(unsigned int id) { // 게임 정보 검색 (일련번호)
     if (mGame != nullptr) {
-        
+        return mGame->findID(id);
     }
+    
+    return nullptr;
 }
 
 void App::viewGame() { // 게임 정보 조회 (대여 여부 등 확인)

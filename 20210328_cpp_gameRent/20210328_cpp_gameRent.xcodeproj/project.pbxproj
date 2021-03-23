@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		034B16D026022A8F00B13C82 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 034B16CF26022A8F00B13C82 /* main.cpp */; };
 		034B16F12602307B00B13C82 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 034B16EF2602307B00B13C82 /* App.cpp */; };
+		035A8EA42608D83D00DB27E8 /* IReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035A8EA22608D83D00DB27E8 /* IReader.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		034B16CF26022A8F00B13C82 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		034B16EF2602307B00B13C82 /* App.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		034B16F02602307B00B13C82 /* App.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = App.hpp; sourceTree = "<group>"; };
+		035A8EA22608D83D00DB27E8 /* IReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IReader.cpp; sourceTree = "<group>"; };
+		035A8EA32608D83D00DB27E8 /* IReader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IReader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 				034B16CF26022A8F00B13C82 /* main.cpp */,
 				034B16EF2602307B00B13C82 /* App.cpp */,
 				034B16F02602307B00B13C82 /* App.hpp */,
+				035A8EA22608D83D00DB27E8 /* IReader.cpp */,
+				035A8EA32608D83D00DB27E8 /* IReader.hpp */,
 			);
 			path = 20210328_cpp_gameRent;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				035A8EA42608D83D00DB27E8 /* IReader.cpp in Sources */,
 				034B16D026022A8F00B13C82 /* main.cpp in Sources */,
 				034B16F12602307B00B13C82 /* App.cpp in Sources */,
 			);
