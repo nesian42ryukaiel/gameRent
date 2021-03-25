@@ -6,11 +6,7 @@
 //
 
 #include <iostream>
-#include "App.hpp"
-// 이하 RapidJSON 테스트용 헤더들 명시
-#include "rapidjson/document.h"
-#include "rapidjson/writer.h"
-#include "rapidjson/stringbuffer.h"
+#include "gameRent.hpp"
 
 using namespace libsb;
 

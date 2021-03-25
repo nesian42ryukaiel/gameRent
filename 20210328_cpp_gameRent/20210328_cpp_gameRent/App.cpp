@@ -22,10 +22,12 @@ void App::routine() {
     unsigned int id = 0;
     std::string name;
     libsb::Node* search = nullptr;
-    bool human = false;
-    unsigned int rent = 0;
+    // bool human = false;
+    // unsigned int rent = 0;
     
-    loadCustomer(); // 고객 정보 로드
+    FileRW filereadwrite;
+    filereadwrite.loadCustomer(mCustomer);
+    //loadCustomer(); // 고객 정보 로드
     loadGame(); // 게임 정보 로드
     
 //    std::cout << "Initializing";
@@ -133,7 +135,6 @@ void App::routine() {
     saveGame(); // 게임 정보 저장
 }
 
-
 void App::loadCustomer() { // 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.json)
     if (mCustomer == nullptr) {
         mCustomer = new libsb::List();
@@ -157,6 +158,32 @@ void App::loadCustomer() { // 고객 정보 로드 (from /Users/lvcrivca/repo/ga
         std::cout << "[DEBUG_M]: Customer data safely loaded.\n" << std::endl;
     }
 }
+
+void App::loadGame() { // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.json)
+    if (mGame == nullptr) {
+        mGame = new libsb::List();
+        // 여기서 로드
+        rapidjson::Document document;
+        char readBuffer[65536];
+        
+        FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/game.json", "r");
+        
+        rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
+        
+        document.ParseStream(is);
+        
+        for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
+            mGame->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
+            
+        }
+        
+        fclose(fp);
+        
+        std::cout << "[DEBUG_M]: Game data safely loaded.\n" << std::endl;
+    }
+}
+
+//----------------
 
 void App::saveCustomer() { // 고객 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/customer.json)
     if (mCustomer != nullptr) {
@@ -196,72 +223,6 @@ void App::saveCustomer() { // 고객 정보 저장 ( to  /Users/lvcrivca/repo/ga
         
         std::cout << "[DEBUG_M]: Customer data safely stored.\n" << std::endl;
         delete mCustomer;
-    }
-}
-
-void App::addCustomer(unsigned int id, std::string name) {  // 고객 정보 입력 (신규)
-    if (mCustomer != nullptr) {
-        // 여기서 타이핑; 이름과 전화번호 둘 다 중복이면 거부
-        mCustomer->push_back(id, name, true, 0);
-    }
-}
-
-libsb::Node* App::findCustomerName(std::string name) {  // 고객 정보 검색 (이름)
-    if (mCustomer != nullptr) {
-        // 여기서 타이핑
-        return mCustomer->findName(name); // return을 바꿔야 하나
-    }
-    
-    return nullptr;
-}
-
-libsb::Node* App::findCustomerID(unsigned int id) {  // 고객 정보 검색 (전화번호)
-    if (mCustomer != nullptr) {
-        
-        return mCustomer->findID(id);
-    }
-    
-    return nullptr;
-}
-
-void App::viewCustomer() { // 고객 정보 조회 ()
-    if (mCustomer != nullptr) {
-        // 인간일 경우만
-        // 고객의 이름과 전화번호를 print
-        // 그리고 해당 고객이 빌린 모든 게임들을 게재
-    }
-}
-
-void App::offCustomer() { // 고객 정보 삭제 (탈퇴)
-    if (mCustomer != nullptr) {
-        // 인간일 경우만
-        // 고객 정보 노드 삭제
-        
-    }
-}
-
-
-void App::loadGame() { // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.json)
-    if (mGame == nullptr) {
-        mGame = new libsb::List();
-        // 여기서 로드
-        rapidjson::Document document;
-        char readBuffer[65536];
-        
-        FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/game.json", "r");
-        
-        rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
-        
-        document.ParseStream(is);
-        
-        for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
-            mGame->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
-            
-        }
-        
-        fclose(fp);
-        
-        std::cout << "[DEBUG_M]: Game data safely loaded.\n" << std::endl;
     }
 }
 
@@ -305,6 +266,53 @@ void App::saveGame() { // 게임 정보 저장 ( to  /Users/lvcrivca/repo/gameRe
     }
 }
 
+//----------------
+
+void App::addCustomer(unsigned int id, std::string name) {  // 고객 정보 입력 (신규)
+    if (mCustomer != nullptr) {
+        // 여기서 타이핑; 이름과 전화번호 둘 다 중복이면 거부
+        mCustomer->push_back(id, name, true, 0);
+    }
+}
+
+libsb::Node* App::findCustomerName(std::string name) {  // 고객 정보 검색 (이름)
+    if (mCustomer != nullptr) {
+        // 여기서 타이핑
+        return mCustomer->findName(name); // return을 바꿔야 하나
+    }
+    
+    return nullptr;
+}
+
+libsb::Node* App::findCustomerID(unsigned int id) {  // 고객 정보 검색 (전화번호)
+    if (mCustomer != nullptr) {
+        
+        return mCustomer->findID(id);
+    }
+    
+    return nullptr;
+}
+
+void App::viewCustomer(libsb::Node* customer) { // 고객 정보 조회 ()
+    if (mCustomer != nullptr) {
+        // 인간일 경우만
+        // 고객의 이름과 전화번호를 print
+        std::cout << "[" << customer->mID << "] " << customer->mName << "\n" << std::endl;
+        // 그리고 해당 고객이 빌린 모든 게임들을 게재
+    }
+}
+
+void App::offCustomer(libsb::Node* customer) { // 고객 정보 삭제 (탈퇴)
+    // customer을 찾았다는 걸 전제
+    if (mCustomer != nullptr) {
+        // 인간일 경우만
+        // 고객 정보 노드 삭제
+        mCustomer->remove(customer);
+    }
+}
+
+//----------------
+
 void App::addGame(unsigned int id, std::string name) { // 게임 정보 입력 (신규)
     if (mGame != nullptr) {
         mGame->push_back(id, name, false, 0);
@@ -327,17 +335,19 @@ libsb::Node* App::findGameID(unsigned int id) { // 게임 정보 검색 (일련�
     return nullptr;
 }
 
-void App::viewGame() { // 게임 정보 조회 (대여 여부 등 확인)
+void App::viewGame(libsb::Node* game) { // 게임 정보 조회 (대여 여부 등 확인)
     if (mGame != nullptr) {
-        
+        std::cout << "[" << game->mID << "] " << game->mName << "\n" << std::endl;
     }
 }
 
-void App::offGame() { // 게임 정보 삭제 (매각)
+void App::offGame(libsb::Node* game) { // 게임 정보 삭제 (매각)
     if (mGame != nullptr) {
-        
+        mGame->remove(game);
     }
 }
+
+//----------------
 
 void App::rentGame() { // 게임 대여 처리
     if (mGame != nullptr) {
