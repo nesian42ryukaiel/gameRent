@@ -10,6 +10,9 @@
 		034B16D026022A8F00B13C82 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 034B16CF26022A8F00B13C82 /* main.cpp */; };
 		034B16F12602307B00B13C82 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 034B16EF2602307B00B13C82 /* App.cpp */; };
 		035A8EA8260B1AC100DB27E8 /* FileRW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035A8EA6260B1AC100DB27E8 /* FileRW.cpp */; };
+		035A8EB0260C9A9100DB27E8 /* Rental.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035A8EAE260C9A9100DB27E8 /* Rental.cpp */; };
+		035A8EB4260C9AA400DB27E8 /* Customer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035A8EB2260C9AA400DB27E8 /* Customer.cpp */; };
+		035A8EB8260C9AB000DB27E8 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035A8EB6260C9AB000DB27E8 /* Game.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +35,12 @@
 		035A8EA6260B1AC100DB27E8 /* FileRW.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileRW.cpp; sourceTree = "<group>"; };
 		035A8EA7260B1AC100DB27E8 /* FileRW.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileRW.hpp; sourceTree = "<group>"; };
 		035A8EAA260B1AE300DB27E8 /* gameRent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameRent.hpp; sourceTree = "<group>"; };
+		035A8EAE260C9A9100DB27E8 /* Rental.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rental.cpp; sourceTree = "<group>"; };
+		035A8EAF260C9A9100DB27E8 /* Rental.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Rental.hpp; sourceTree = "<group>"; };
+		035A8EB2260C9AA400DB27E8 /* Customer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Customer.cpp; sourceTree = "<group>"; };
+		035A8EB3260C9AA400DB27E8 /* Customer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Customer.hpp; sourceTree = "<group>"; };
+		035A8EB6260C9AB000DB27E8 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		035A8EB7260C9AB000DB27E8 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +79,12 @@
 				034B16F02602307B00B13C82 /* App.hpp */,
 				035A8EA6260B1AC100DB27E8 /* FileRW.cpp */,
 				035A8EA7260B1AC100DB27E8 /* FileRW.hpp */,
+				035A8EAE260C9A9100DB27E8 /* Rental.cpp */,
+				035A8EAF260C9A9100DB27E8 /* Rental.hpp */,
+				035A8EB2260C9AA400DB27E8 /* Customer.cpp */,
+				035A8EB3260C9AA400DB27E8 /* Customer.hpp */,
+				035A8EB6260C9AB000DB27E8 /* Game.cpp */,
+				035A8EB7260C9AB000DB27E8 /* Game.hpp */,
 			);
 			path = 20210328_cpp_gameRent;
 			sourceTree = "<group>";
@@ -130,7 +145,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				035A8EB4260C9AA400DB27E8 /* Customer.cpp in Sources */,
 				035A8EA8260B1AC100DB27E8 /* FileRW.cpp in Sources */,
+				035A8EB0260C9A9100DB27E8 /* Rental.cpp in Sources */,
+				035A8EB8260C9AB000DB27E8 /* Game.cpp in Sources */,
 				034B16D026022A8F00B13C82 /* main.cpp in Sources */,
 				034B16F12602307B00B13C82 /* App.cpp in Sources */,
 			);

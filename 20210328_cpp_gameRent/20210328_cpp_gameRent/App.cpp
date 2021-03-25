@@ -26,8 +26,8 @@ void App::routine() {
     // unsigned int rent = 0;
     
     FileRW filereadwrite;
-    filereadwrite.loadCustomer(mCustomer);
-    //loadCustomer(); // 고객 정보 로드
+    //filereadwrite.loadCustomer(mCustomer);
+    loadCustomer(); // 고객 정보 로드
     loadGame(); // 게임 정보 로드
     
 //    std::cout << "Initializing";
@@ -136,7 +136,7 @@ void App::routine() {
 }
 
 void App::loadCustomer() { // 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.json)
-    if (mCustomer == nullptr) {
+    if (mCustomer != nullptr) {
         mCustomer = new libsb::List();
         // 여기서 로드
         rapidjson::Document document;
@@ -160,7 +160,7 @@ void App::loadCustomer() { // 고객 정보 로드 (from /Users/lvcrivca/repo/ga
 }
 
 void App::loadGame() { // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.json)
-    if (mGame == nullptr) {
+    if (mGame != nullptr) {
         mGame = new libsb::List();
         // 여기서 로드
         rapidjson::Document document;
@@ -363,17 +363,26 @@ void App::retrieveGame() { // 게임 반납 처리
 
 //----------------
 
-App::App():
-mCustomer(nullptr), mGame(nullptr) // , mRent(nullptr)
-{
+App::App() {
+    // 여기서 아예 미리 mCustomer와 mGame을 선언해버리기...?
+    mCustomer = new libsb::List();
+    mGame = new libsb::List();
     std::cout << "[DEBUG_M]: Zoom\n" << std::endl;
 }
 
 App::~App() {
-    std::cout << "[DEBUG_M]: pooF\n" << std::endl;
+    if (mCustomer != nullptr) {
+        delete mCustomer;
+        mCustomer = nullptr;
+    }
+    if (mGame != nullptr) {
+        delete mGame;
+        mGame = nullptr;
+    }
     if (instance != nullptr) {
         delete instance;
         instance = nullptr;
     }
-    
+    std::cout << "[DEBUG_M]: pooF\n" << std::endl;
+
 }

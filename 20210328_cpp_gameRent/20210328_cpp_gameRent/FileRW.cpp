@@ -16,7 +16,7 @@ FileRW::~FileRW() {
 }
 
 void FileRW::loadCustomer(libsb::List* customer) { // 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.json)
-    if (customer == nullptr) {
+    if (customer != nullptr) {
         customer = new libsb::List();
         // 여기서 로드
         rapidjson::Document document;
@@ -81,7 +81,7 @@ void FileRW::saveCustomer(libsb::List* customer) { // 고객 정보 저장 ( to 
 }
 
 void FileRW::loadGame(libsb::List* game) { // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.json)
-    if (game == nullptr) {
+    if (game != nullptr) {
         game = new libsb::List();
         // 여기서 로드
         rapidjson::Document document;

@@ -18,7 +18,7 @@
 
 class App {
 public:
-    static App* getInstance();
+    static App* getInstance(); // 싱글턴 사용
     
     void routine();
     
