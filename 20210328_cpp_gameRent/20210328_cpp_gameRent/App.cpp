@@ -136,51 +136,51 @@ void App::routine() {
 }
 
 void App::loadCustomer() { // 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.json)
-    if (mCustomer != nullptr) {
+    if (mCustomer == nullptr) {
         mCustomer = new libsb::List();
-        // 여기서 로드
-        rapidjson::Document document;
-        char readBuffer[65536];
-        
-        FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/customer.json", "r");
-        
-        rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
-        
-        document.ParseStream(is);
-        
-        for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
-            mCustomer->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
-            
-        }
-        
-        fclose(fp);
-        
-        std::cout << "[DEBUG_M]: Customer data safely loaded.\n" << std::endl;
     }
+
+    rapidjson::Document document;
+    char readBuffer[65536];
+    
+    FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/customer.json", "r");
+    
+    rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
+    
+    document.ParseStream(is);
+    
+    for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
+        mCustomer->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
+        
+    }
+    
+    fclose(fp);
+    
+    std::cout << "[DEBUG_M]: Customer data safely loaded.\n" << std::endl;
 }
 
 void App::loadGame() { // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.json)
-    if (mGame != nullptr) {
+    if (mGame == nullptr) {
         mGame = new libsb::List();
-        // 여기서 로드
-        rapidjson::Document document;
-        char readBuffer[65536];
-        
-        FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/game.json", "r");
-        
-        rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
-        
-        document.ParseStream(is);
-        
-        for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
-            mGame->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
-            
-        }
-        
-        fclose(fp);
-        
-        std::cout << "[DEBUG_M]: Game data safely loaded.\n" << std::endl;
     }
+    
+    rapidjson::Document document;
+    char readBuffer[65536];
+    
+    FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/game.json", "r");
+    
+    rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
+    
+    document.ParseStream(is);
+    
+    for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
+        mGame->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
+        
+    }
+    
+    fclose(fp);
+    
+    std::cout << "[DEBUG_M]: Game data safely loaded.\n" << std::endl;
 }
 
 //----------------

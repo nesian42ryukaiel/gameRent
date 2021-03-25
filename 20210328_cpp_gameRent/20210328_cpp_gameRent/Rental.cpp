@@ -16,7 +16,6 @@ Rental::~Rental() {
 };
 
 void Rental::rent(libsb::List* customer, unsigned int phone, libsb::List* game, unsigned int serial) {
-    // 두 입력값을 id로 갖고 있는 node들이 이미 있다고 가정
     if (customer->findID(phone) != nullptr && game->findID(serial) != nullptr && game->findID(serial)->mIsOnRent == 0) {
         game->findID(serial)->mIsOnRent = customer->findID(phone)->mID;
         // 연체 부분을 구현한다면 여기다 구현

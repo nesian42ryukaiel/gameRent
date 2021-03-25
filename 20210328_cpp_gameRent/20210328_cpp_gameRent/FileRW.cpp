@@ -15,39 +15,37 @@ FileRW::~FileRW() {
     
 }
 
-void FileRW::loadCustomer(libsb::List* customer) { // 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.json)
-    if (customer != nullptr) {
+void FileRW::loadCustomer(libsb::List* customer) {
+    if (customer == nullptr) {
         customer = new libsb::List();
-        // 여기서 로드
-        rapidjson::Document document;
-        char readBuffer[65536];
-        
-        FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/customer.json", "r");
-        
-        rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
-        
-        document.ParseStream(is);
-        
-        for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
-            customer->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
-            
-        }
-        
-        fclose(fp);
-        
-        std::cout << "[DEBUG_M]: Customer data safely loaded.\n" << std::endl;
     }
+    
+    rapidjson::Document document;
+    char readBuffer[65536];
+    
+    FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/customer.json", "r");
+    
+    rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
+    
+    document.ParseStream(is);
+    
+    for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
+        customer->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
+        
+    }
+    
+    fclose(fp);
+    
+    std::cout << "[DEBUG_M]: Customer data safely loaded.\n" << std::endl;
 }
 
-void FileRW::saveCustomer(libsb::List* customer) { // 고객 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/customer.json)
+void FileRW::saveCustomer(libsb::List* customer) {
     if (customer != nullptr) {
-        // 여기서 저장
         rapidjson::Document document;
         document.SetArray();
         rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
         
         for (libsb::Node* iterator = customer->getHead(); iterator != nullptr; iterator = iterator->next) {
-            // 아마 여기서 역 파싱
             rapidjson::Value objValue;
             objValue.SetObject();
             
@@ -80,38 +78,37 @@ void FileRW::saveCustomer(libsb::List* customer) { // 고객 정보 저장 ( to 
     }
 }
 
-void FileRW::loadGame(libsb::List* game) { // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.json)
-    if (game != nullptr) {
+void FileRW::loadGame(libsb::List* game) {
+    if (game == nullptr) {
         game = new libsb::List();
-        // 여기서 로드
-        rapidjson::Document document;
-        char readBuffer[65536];
-        
-        FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/game.json", "r");
-        
-        rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
-        
-        document.ParseStream(is);
-        
-        for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
-            game->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
-            
-        }
-        
-        fclose(fp);
-        
-        std::cout << "[DEBUG_M]: Game data safely loaded.\n" << std::endl;
     }
+    
+    rapidjson::Document document;
+    char readBuffer[65536];
+    
+    FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/game.json", "r");
+    
+    rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
+    
+    document.ParseStream(is);
+    
+    for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
+        game->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
+        
+    }
+    
+    fclose(fp);
+    
+    std::cout << "[DEBUG_M]: Game data safely loaded.\n" << std::endl;
 }
 
-void FileRW::saveGame(libsb::List* game) { // 게임 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/game.json)
+void FileRW::saveGame(libsb::List* game) {
     if (game != nullptr) {
         rapidjson::Document document;
         document.SetArray();
         rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
         
         for (libsb::Node* iterator = game->getHead(); iterator != nullptr; iterator = iterator->next) {
-            // 아마 여기서 역 파싱
             rapidjson::Value objValue;
             objValue.SetObject();
             
