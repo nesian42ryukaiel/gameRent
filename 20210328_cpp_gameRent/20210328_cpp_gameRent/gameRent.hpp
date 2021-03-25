@@ -17,8 +17,8 @@
 
 #include "App.hpp"
 #include "FileRW.hpp"
-#include "Rental.hpp"
-#include "Customer.hpp"
-#include "Game.hpp"
+#include "RentalSystem.hpp"
+#include "CustomerManager.hpp"
+#include "GameManager.hpp"
 
 #endif /* gameRent_h */

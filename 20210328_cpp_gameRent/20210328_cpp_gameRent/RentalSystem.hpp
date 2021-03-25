@@ -10,10 +10,10 @@
 
 #include "gameRent.hpp"
 
-class Rental {
+class RentalSystem {
 public:
-    Rental();
-    ~Rental();
+    RentalSystem();
+    ~RentalSystem();
     
     void rent(libsb::List* customer, unsigned int phone, libsb::List* game, unsigned int serial); // 게임 대여 처리; 빌리려는 고객과 게임의 id를 받아 연결한다.
     void retrieve(libsb::List* game, unsigned int serial);// 게임 반납 처리; 빌린 상태인 게임의 id를 받아 해제한다.

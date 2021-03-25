@@ -5,23 +5,23 @@
 //  Created by 유기하 on 2021/03/25.
 //
 
-#include "Game.hpp"
+#include "GameManager.hpp"
 
-Game::Game() {
+GameManager::GameManager() {
     
 }
 
-Game::~Game() {
+GameManager::~GameManager() {
     
 }
 
-void Game::stash(libsb::List* game, unsigned int id, std::string name) {
+void GameManager::stash(libsb::List* game, unsigned int id, std::string name) {
     if (game != nullptr) {
         game->push_back(id, name, false, 0);
     }
 }
 
-libsb::Node* Game::findTitle(libsb::List* game, std::string title) {
+libsb::Node* GameManager::findTitle(libsb::List* game, std::string title) {
     if (game != nullptr) {
         return game->findName(title);
     }
@@ -29,7 +29,7 @@ libsb::Node* Game::findTitle(libsb::List* game, std::string title) {
     return nullptr;
 }
 
-libsb::Node* Game::findSerial(libsb::List* game, unsigned int serial) {
+libsb::Node* GameManager::findSerial(libsb::List* game, unsigned int serial) {
     if (game != nullptr) {
         return game->findID(serial);
     }
@@ -37,13 +37,13 @@ libsb::Node* Game::findSerial(libsb::List* game, unsigned int serial) {
     return nullptr;
 }
 
-void Game::viewGame(libsb::List* game, libsb::Node* soft) {
+void GameManager::viewGame(libsb::List* game, libsb::Node* soft) {
     if (game != nullptr && soft != nullptr) {
         std::cout << "[" << soft->mID << "] " << soft->mName << "\n" << std::endl;
     }
 }
 
-void Game::dispose(libsb::List* game, libsb::Node* soft) {
+void GameManager::dispose(libsb::List* game, libsb::Node* soft) {
     if (game != nullptr && soft != nullptr) {
         game->remove(soft);
     }

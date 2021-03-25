@@ -10,10 +10,10 @@
 
 #include "gameRent.hpp"
 
-class Customer {
+class CustomerManager {
 public:
-    Customer();
-    ~Customer();
+    CustomerManager();
+    ~CustomerManager();
     
     void signup(libsb::List* customer, unsigned int id, std::string name); // 고객 정보 입력 (신규)
     libsb::Node* findName(libsb::List* customer, std::string name); // 고객 정보 검색 (이름)

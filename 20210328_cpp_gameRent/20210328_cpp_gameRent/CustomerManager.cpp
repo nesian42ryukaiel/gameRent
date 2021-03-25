@@ -5,23 +5,23 @@
 //  Created by 유기하 on 2021/03/25.
 //
 
-#include "Customer.hpp"
+#include "CustomerManager.hpp"
 
-Customer::Customer() {
+CustomerManager::CustomerManager() {
     
 }
 
-Customer::~Customer() {
+CustomerManager::~CustomerManager() {
     
 }
 
-void Customer::signup(libsb::List* customer, unsigned int id, std::string name) {
+void CustomerManager::signup(libsb::List* customer, unsigned int id, std::string name) {
     if (customer != nullptr) {
         customer->push_back(id, name, true, 0);
     }
 }
 
-libsb::Node* Customer::findName(libsb::List* customer, std::string name) {
+libsb::Node* CustomerManager::findName(libsb::List* customer, std::string name) {
     if (customer != nullptr) {
         return customer->findName(name);
     }
@@ -29,7 +29,7 @@ libsb::Node* Customer::findName(libsb::List* customer, std::string name) {
     return nullptr;
 }
 
-libsb::Node* Customer::findPhone(libsb::List* customer, unsigned int phone) {
+libsb::Node* CustomerManager::findPhone(libsb::List* customer, unsigned int phone) {
     if (customer != nullptr) {
         
         return customer->findID(phone);
@@ -38,13 +38,13 @@ libsb::Node* Customer::findPhone(libsb::List* customer, unsigned int phone) {
     return nullptr;
 }
 
-void Customer::viewIndividual(libsb::List* customer, libsb::Node* individual) {
+void CustomerManager::viewIndividual(libsb::List* customer, libsb::Node* individual) {
     if (customer != nullptr && individual != nullptr) {
         std::cout << "[" << individual->mID << "] " << individual->mName << "\n" << std::endl;
     }
 }
 
-void Customer::unsign(libsb::List* customer, libsb::Node* individual) {
+void CustomerManager::unsign(libsb::List* customer, libsb::Node* individual) {
     if (customer != nullptr && individual != nullptr) {
         customer->remove(individual);
     }
