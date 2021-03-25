@@ -10,10 +10,18 @@
 
 #include <iostream>
 #include <fstream>
-#include <silverbeetle/DataStructure>
-#include <rapidjson/RapidJsonUsing>
 #include <stdio.h>
 #include "unistd.h"
+
+#include <silverbeetle/DataStructure>
+
+#include <rapidjson/document.h>
+#include <rapidjson/filereadstream.h>
+#include <rapidjson/istreamwrapper.h>
+#include <rapidjson/writer.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/filewritestream.h>
+#include <rapidjson/ostreamwrapper.h>
 
 #include "App.hpp"
 #include "FileRW.hpp"
