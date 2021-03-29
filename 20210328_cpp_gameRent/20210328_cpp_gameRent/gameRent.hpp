@@ -23,6 +23,12 @@
 #include <rapidjson/filewritestream.h>
 #include <rapidjson/ostreamwrapper.h>
 
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+#include <GL/gl3w.h>
+#include <GLFW/glfw3.h>
+
 #include "App.hpp"
 #include "FileRW.hpp"
 #include "RentalSystem.hpp"

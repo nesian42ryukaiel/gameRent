@@ -13,6 +13,10 @@
 		035A8EB0260C9A9100DB27E8 /* RentalSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035A8EAE260C9A9100DB27E8 /* RentalSystem.cpp */; };
 		035A8EB4260C9AA400DB27E8 /* CustomerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035A8EB2260C9AA400DB27E8 /* CustomerManager.cpp */; };
 		035A8EB8260C9AB000DB27E8 /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 035A8EB6260C9AB000DB27E8 /* GameManager.cpp */; };
+		035A8ED4260F1FEB00DB27E8 /* libimgui-osx.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 035A8ED3260F1FEB00DB27E8 /* libimgui-osx.dylib */; };
+		035A8ED5260F1FEB00DB27E8 /* libimgui-osx.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 035A8ED3260F1FEB00DB27E8 /* libimgui-osx.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		035A8EE026108B2A00DB27E8 /* libglfw.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 035A8EDF26108B2A00DB27E8 /* libglfw.3.dylib */; };
+		035A8EE126108B2A00DB27E8 /* libglfw.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 035A8EDF26108B2A00DB27E8 /* libglfw.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,6 +28,18 @@
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
+		};
+		035A8ED6260F1FEB00DB27E8 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				035A8ED5260F1FEB00DB27E8 /* libimgui-osx.dylib in Embed Libraries */,
+				035A8EE126108B2A00DB27E8 /* libglfw.3.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -41,6 +57,8 @@
 		035A8EB3260C9AA400DB27E8 /* CustomerManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CustomerManager.hpp; sourceTree = "<group>"; };
 		035A8EB6260C9AB000DB27E8 /* GameManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameManager.cpp; sourceTree = "<group>"; };
 		035A8EB7260C9AB000DB27E8 /* GameManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameManager.hpp; sourceTree = "<group>"; };
+		035A8ED3260F1FEB00DB27E8 /* libimgui-osx.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libimgui-osx.dylib"; path = "../thirdparty/imgui/lib/libimgui-osx.dylib"; sourceTree = "<group>"; };
+		035A8EDF26108B2A00DB27E8 /* libglfw.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.dylib; path = ../thirdparty/glfw/lib/libglfw.3.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				035A8ED4260F1FEB00DB27E8 /* libimgui-osx.dylib in Frameworks */,
+				035A8EE026108B2A00DB27E8 /* libglfw.3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +79,7 @@
 			children = (
 				034B16CE26022A8F00B13C82 /* 20210328_cpp_gameRent */,
 				034B16CD26022A8F00B13C82 /* Products */,
+				035A8ED2260F1FEB00DB27E8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,6 +110,15 @@
 			path = 20210328_cpp_gameRent;
 			sourceTree = "<group>";
 		};
+		035A8ED2260F1FEB00DB27E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				035A8EDF26108B2A00DB27E8 /* libglfw.3.dylib */,
+				035A8ED3260F1FEB00DB27E8 /* libimgui-osx.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -99,6 +129,7 @@
 				034B16C826022A8F00B13C82 /* Sources */,
 				034B16C926022A8F00B13C82 /* Frameworks */,
 				034B16CA26022A8F00B13C82 /* CopyFiles */,
+				035A8ED6260F1FEB00DB27E8 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -278,10 +309,20 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_THIRDPARTY_DIR)/silverbeetle/include",
 					"$(PROJECT_THIRDPARTY_DIR)/rapidjson/include",
+					"$(PROJECT_THIRDPARTY_DIR)/glfw/include",
+					"$(PROJECT_THIRDPARTY_DIR)/gl3w/include",
+					"$(PROJECT_THIRDPARTY_DIR)/imgui/include",
 				);
 				LD_RUNPATH_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_THIRDPARTY_DIR)/silverbeetle/lib";
-				OTHER_LDFLAGS = "-lsilverbeetle";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_THIRDPARTY_DIR)/silverbeetle/lib",
+					"$(PROJECT_THIRDPARTY_DIR)/imgui/lib",
+					"$(PROJECT_THIRDPARTY_DIR)/glfw/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-lsilverbeetle",
+					"$(PROJECT_THIRDPARTY_DIR)/imgui/lib/libimgui-osx.dylib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_THIRDPARTY_DIR = "$(PROJECT_DIR)/../thirdparty";
 			};
@@ -297,10 +338,20 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_THIRDPARTY_DIR)/silverbeetle/include",
 					"$(PROJECT_THIRDPARTY_DIR)/rapidjson/include",
+					"$(PROJECT_THIRDPARTY_DIR)/glfw/include",
+					"$(PROJECT_THIRDPARTY_DIR)/gl3w/include",
+					"$(PROJECT_THIRDPARTY_DIR)/imgui/include",
 				);
 				LD_RUNPATH_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_THIRDPARTY_DIR)/silverbeetle/lib";
-				OTHER_LDFLAGS = "-lsilverbeetle";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_THIRDPARTY_DIR)/silverbeetle/lib",
+					"$(PROJECT_THIRDPARTY_DIR)/imgui/lib",
+					"$(PROJECT_THIRDPARTY_DIR)/glfw/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-lsilverbeetle",
+					"$(PROJECT_THIRDPARTY_DIR)/imgui/lib/libimgui-osx.dylib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROJECT_THIRDPARTY_DIR = "$(PROJECT_DIR)/../thirdparty";
 			};
