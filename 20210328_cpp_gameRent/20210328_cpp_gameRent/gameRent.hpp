@@ -29,10 +29,10 @@
 #include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
 
-#include "App.hpp"
-#include "FileRW.hpp"
-#include "RentalSystem.hpp"
-#include "CustomerManager.hpp"
-#include "GameManager.hpp"
+//#include "App.hpp"
+//#include "FileRW.hpp"
+//#include "RentalSystem.hpp"
+//#include "CustomerManager.hpp"
+//#include "GameManager.hpp"
 
 #endif /* gameRent_h */

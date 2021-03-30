@@ -15,13 +15,18 @@
 //#include <rapidjson/RapidJsonUsing>
 //#include "unistd.h"
 #include "gameRent.hpp"
+#include "FileRW.hpp"
+#include "RentalSystem.hpp"
+#include "CustomerManager.hpp"
+#include "GameManager.hpp"
 
 class App {
 public:
     static App* getInstance(); // 싱글턴 사용
     
-    void routine();
+    // void routine();
     
+    /*
     void loadCustomer();// 고객 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/customer.json)
     void loadGame(); // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.json)
     void saveCustomer();// 고객 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/customer.json)
@@ -41,6 +46,16 @@ public:
     
     void rentGame(); // 게임 대여 처리
     void retrieveGame();// 게임 반납 처리
+     */
+    
+    // 여기다 공개해야할지 잘 모르겠으나...
+    libsb::List* mCustomer;
+    libsb::List* mGame;
+    
+    FileRW* mFileRW;
+    RentalSystem* mRentalSystem;
+    CustomerManager* mCustomerManager;
+    GameManager* mGameManager;
     
 protected:
     
@@ -48,10 +63,6 @@ protected:
 private:
     App();
     ~App();
-    
-    libsb::List* mCustomer;
-    libsb::List* mGame;
-    // libsb::List* mRent;
     
     static App* instance;
     

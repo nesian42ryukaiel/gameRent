@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "gameRent.hpp"
+#include "App.hpp"
 
 //using namespace libsb;
 
@@ -161,8 +162,45 @@ int main(int argc, const char * argv[]) {
         }
         
         // 4. My take (Lucas Yew)
+        const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
+        ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 60, main_viewport->WorkPos.y + 300), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2(480, 320), ImGuiCond_FirstUseEver);
+        
         {
-            ImGui::Begin("Lucas's Window");
+            ImGui::Begin("Game Store Rent");
+            
+            if (ImGui::CollapsingHeader("Data Management"))
+            {
+                ImGui::Text("Load and save store data here.");
+                if (ImGui::Button("Load##StoreData")) {
+                    session->mFileRW->FileRW::loadCustomer(session->mCustomer);
+                    session->mFileRW->FileRW::loadGame(session->mGame);
+                }
+                if (ImGui::Button("Save##StoreData")) {
+                    session->mFileRW->FileRW::saveCustomer(session->mCustomer);
+                    session->mFileRW->FileRW::saveGame(session->mGame);
+                }
+            }
+            
+            if (ImGui::CollapsingHeader("Rental Service"))
+            {
+                ImGui::Text("Rent and retrieve games here.");
+            }
+            
+            if (ImGui::CollapsingHeader("Customer Call"))
+            {
+                ImGui::Text("Enter phone number and name to add.");
+                static char newphone[64] = ""; ImGui::InputText("Phone", newphone, 64);
+                static char newname[64] = ""; ImGui::InputText("Name", newname, 64, ImGuiInputTextFlags_CharsDecimal);
+                if (ImGui::Button("Add##Customer")) {
+                    //session->addCustomer(newphone, newname);
+                }
+            }
+            
+            if (ImGui::CollapsingHeader("Game Software"))
+            {
+                
+            }
             
             ImGui::Text("This is text for testing.");
             if (ImGui::CollapsingHeader("Help"))
