@@ -20,6 +20,9 @@ public:
     void loadGame(libsb::List* game); // 게임 정보 로드 (from /Users/lvcrivca/repo/gameRent/grSave/game.json)
     void saveGame(libsb::List* game); // 게임 정보 저장 ( to  /Users/lvcrivca/repo/gameRent/grSave/game.json)
     
+    static bool loadedCustomer;
+    static bool loadedGame;
+    
 };
 
 #endif /* FileRW_hpp */

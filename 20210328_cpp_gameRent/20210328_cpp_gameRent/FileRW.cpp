@@ -7,6 +7,9 @@
 
 #include "FileRW.hpp"
 
+bool FileRW::loadedCustomer = false;
+bool FileRW::loadedGame = false;
+
 FileRW::FileRW() {
     
 }
@@ -18,29 +21,38 @@ FileRW::~FileRW() {
 void FileRW::loadCustomer(libsb::List* customer) {
     if (customer == nullptr) {
         customer = new libsb::List();
+    } else {
+        std::cout << "[DEBUG_M]: Customer list already loaded.\n" << std::endl;
     }
     
-    rapidjson::Document document;
-    char readBuffer[65536];
-    
-    FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/customer.json", "r");
-    
-    rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
-    
-    document.ParseStream(is);
-    
-    for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
-        customer->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
+    if (loadedCustomer == false) {
+        rapidjson::Document document;
+        char readBuffer[65536];
+            
+        FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/customer.json", "r");
+            
+        rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
+            
+        document.ParseStream(is);
+            
+        for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
+            customer->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
+            
+        }
         
+        fclose(fp);
+        
+        loadedCustomer = true;
+        
+        std::cout << "[DEBUG_M]: Customer data safely loaded.\n" << std::endl;
+    } else {
+        std::cout << "[DEBUG_M]: Customer data already loaded.\n" << std::endl;
     }
     
-    fclose(fp);
-    
-    std::cout << "[DEBUG_M]: Customer data safely loaded.\n" << std::endl;
 }
 
 void FileRW::saveCustomer(libsb::List* customer) {
-    if (customer != nullptr) {
+    if (customer != nullptr && loadedCustomer == true) {
         rapidjson::Document document;
         document.SetArray();
         rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
@@ -74,36 +86,47 @@ void FileRW::saveCustomer(libsb::List* customer) {
         fclose(fp);
         
         std::cout << "[DEBUG_M]: Customer data safely stored.\n" << std::endl;
-        delete customer;
+        // delete customer;
+    } else {
+        std::cout << "[DEBUG_M]: Nothing to save.\n" << std::endl;
     }
 }
 
 void FileRW::loadGame(libsb::List* game) {
     if (game == nullptr) {
         game = new libsb::List();
+    } else {
+        std::cout << "[DEBUG_M]: Game list already loaded.\n" << std::endl;
     }
     
-    rapidjson::Document document;
-    char readBuffer[65536];
-    
-    FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/game.json", "r");
-    
-    rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
-    
-    document.ParseStream(is);
-    
-    for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
-        game->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
+    if (loadedGame == false) {
+        rapidjson::Document document;
+        char readBuffer[65536];
         
+        FILE* fp = fopen("/Users/lvcrivca/repo/gameRent/grSave/game.json", "r");
+        
+        rapidjson::FileReadStream is (fp, readBuffer, sizeof(readBuffer));
+        
+        document.ParseStream(is);
+        
+        for (rapidjson::SizeType i = 0; i < document.Size(); i++) {
+            game->push_back(document[i]["ID"].GetUint(), document[i]["name"].GetString(), document[i]["isHuman"].GetBool(), document[i]["isOnRent"].GetUint());
+        
+        }
+        
+        fclose(fp);
+        
+        loadedGame = true;
+        
+        std::cout << "[DEBUG_M]: Game data safely loaded.\n" << std::endl;
+    } else {
+        std::cout << "[DEBUG_M]: Game data already loaded.\n" << std::endl;
     }
     
-    fclose(fp);
-    
-    std::cout << "[DEBUG_M]: Game data safely loaded.\n" << std::endl;
 }
 
 void FileRW::saveGame(libsb::List* game) {
-    if (game != nullptr) {
+    if (game != nullptr && loadedGame == true) {
         rapidjson::Document document;
         document.SetArray();
         rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
@@ -137,6 +160,8 @@ void FileRW::saveGame(libsb::List* game) {
         fclose(fp);
         
         std::cout << "[DEBUG_M]: Game data safely stored.\n" << std::endl;
-        delete game;
+        // delete game;
+    } else {
+        std::cout << "[DEBUG_M]: Nothing to save.\n" << std::endl;
     }
 }

@@ -185,21 +185,97 @@ int main(int argc, const char * argv[]) {
             if (ImGui::CollapsingHeader("Rental Service"))
             {
                 ImGui::Text("Rent and retrieve games here.");
+                static int newserial = 0; ImGui::InputInt("Phone", &newserial, false); // false는 쁠마 버튼을 안 보이게 함
+                static char newtitle[64] = ""; ImGui::InputText("Name", newtitle, 64);
+                
             }
             
             if (ImGui::CollapsingHeader("Customer Call"))
             {
-                ImGui::Text("Enter phone number and name to add.");
-                static char newphone[64] = ""; ImGui::InputText("Phone", newphone, 64);
-                static char newname[64] = ""; ImGui::InputText("Name", newname, 64, ImGuiInputTextFlags_CharsDecimal);
-                if (ImGui::Button("Add##Customer")) {
-                    //session->addCustomer(newphone, newname);
+                ImGui::Text("Enter phone number and name to manage.");
+                static int newphone = 0; ImGui::InputInt("Phone", &newphone, false); // false는 쁠마 버튼을 안 보이게 함
+                static char newname[64] = ""; ImGui::InputText("Name", newname, 64);
+                
+                {
+                    
+                    if (ImGui::Button("Signup##Customer")) {
+                        unsigned int parsedphone = (unsigned int)(newphone); // static cast로 변경..할 예정
+                        std::string parsedname(newname);
+                        libsb::Node* phone = session->mCustomerManager->CustomerManager::findPhone(session->mCustomer, parsedphone);
+                        libsb::Node* name = session->mCustomerManager->CustomerManager::findName(session->mCustomer, parsedname);
+                        if (phone == nullptr) {
+                            session->mCustomerManager->CustomerManager::signup(session->mCustomer, parsedphone, parsedname);
+                        }
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("View##Customer")) {
+                        unsigned int parsedphone = (unsigned int)(newphone);
+                        std::string parsedname(newname);
+                        libsb::Node* phone = session->mCustomerManager->CustomerManager::findPhone(session->mCustomer, parsedphone);
+                        libsb::Node* name = session->mCustomerManager->CustomerManager::findName(session->mCustomer, parsedname);
+                        if (phone != nullptr && phone == name) {
+                            session->mCustomerManager->CustomerManager::viewIndividual(session->mCustomer, phone);
+                        }
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("Unsign##Customer")) {
+                        unsigned int parsedphone = (unsigned int)(newphone);
+                        std::string parsedname(newname);
+                        libsb::Node* phone = session->mCustomerManager->CustomerManager::findPhone(session->mCustomer, parsedphone);
+                        libsb::Node* name = session->mCustomerManager->CustomerManager::findName(session->mCustomer, parsedname);
+                        if (phone != nullptr && name != nullptr) {
+                            session->mCustomerManager->CustomerManager::unsign(session->mCustomer, phone);
+                        }
+                    }
+                }
+                if (ImGui::Button("TestPrint")) { // move this around for testing list status
+                    session->mCustomer->print(0);
+                    session->mGame->print(0);
                 }
             }
             
             if (ImGui::CollapsingHeader("Game Software"))
             {
+                ImGui::Text("Enter phone number and name to manage.");
+                static int newserial = 0; ImGui::InputInt("Phone", &newserial, false); // false는 쁠마 버튼을 안 보이게 함
+                static char newtitle[64] = ""; ImGui::InputText("Name", newtitle, 64);
                 
+                {
+                    
+                    if (ImGui::Button("Stash##Game")) {
+                        unsigned int parsedserial = (unsigned int)(newserial); // static cast로 변경..할 예정
+                        std::string parsedtitle(newtitle);
+                        libsb::Node* serial = session->mGameManager->GameManager::findSerial(session->mGame, parsedserial);
+                        libsb::Node* title = session->mGameManager->GameManager::findTitle(session->mGame, parsedtitle);
+                        if (serial == nullptr) {
+                            session->mGameManager->GameManager::stash(session->mGame, parsedserial, parsedtitle);
+                        }
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("View##Game")) {
+                        unsigned int parsedserial = (unsigned int)(newserial); // static cast로 변경..할 예정
+                        std::string parsedtitle(newtitle);
+                        libsb::Node* serial = session->mGameManager->GameManager::findSerial(session->mGame, parsedserial);
+                        libsb::Node* title = session->mGameManager->GameManager::findTitle(session->mGame, parsedtitle);
+                        if (serial != nullptr && serial == title) {
+                            session->mGameManager->GameManager::viewGame(session->mCustomer, serial);
+                        }
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("Dispose##Game")) {
+                        unsigned int parsedserial = (unsigned int)(newserial); // static cast로 변경..할 예정
+                        std::string parsedtitle(newtitle);
+                        libsb::Node* serial = session->mGameManager->GameManager::findSerial(session->mGame, parsedserial);
+                        libsb::Node* title = session->mGameManager->GameManager::findTitle(session->mGame, parsedtitle);
+                        if (serial != nullptr && title != nullptr) {
+                            session->mGameManager->GameManager::dispose(session->mCustomer, serial);
+                        }
+                    }
+                }
+                if (ImGui::Button("TestPrint")) { // move this around for testing list status
+                    session->mCustomer->print(0);
+                    session->mGame->print(0);
+                }
             }
             
             ImGui::Text("This is text for testing.");
