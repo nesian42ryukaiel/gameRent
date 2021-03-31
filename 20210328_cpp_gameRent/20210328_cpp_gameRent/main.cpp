@@ -105,7 +105,7 @@ int main(int argc, const char * argv[]) {
     //IM_ASSERT(font != NULL);
 
     // Our state
-    bool show_demo_window = true;
+    bool show_demo_window = false;
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
@@ -129,27 +129,27 @@ int main(int argc, const char * argv[]) {
             ImGui::ShowDemoWindow(&show_demo_window);
 
         // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
-        {
-            static float f = 0.0f;
-            static int counter = 0;
-
-            ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-            ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-            ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-            ImGui::Checkbox("Another Window", &show_another_window);
-
-            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-            ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-            if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-                counter++;
-            ImGui::SameLine();
-            ImGui::Text("counter = %d", counter);
-
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-            ImGui::End();
-        }
+//        {
+//            static float f = 0.0f;
+//            static int counter = 0;
+//
+//            ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+//
+//            ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+//            ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+//            ImGui::Checkbox("Another Window", &show_another_window);
+//
+//            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+//            ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+//
+//            if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+//                counter++;
+//            ImGui::SameLine();
+//            ImGui::Text("counter = %d", counter);
+//
+//            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+//            ImGui::End();
+//        }
 
         // 3. Show another simple window.
         if (show_another_window)
@@ -163,8 +163,8 @@ int main(int argc, const char * argv[]) {
         
         // 4. My take (Lucas Yew)
         const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
-        ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 60, main_viewport->WorkPos.y + 300), ImGuiCond_FirstUseEver);
-            ImGui::SetNextWindowSize(ImVec2(480, 320), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 60, main_viewport->WorkPos.y + 60), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2(480, 600), ImGuiCond_FirstUseEver);
         
         {
             ImGui::Begin("Game Store Rent");
@@ -185,16 +185,48 @@ int main(int argc, const char * argv[]) {
             if (ImGui::CollapsingHeader("Rental Service"))
             {
                 ImGui::Text("Rent and retrieve games here.");
-                static int newserial = 0; ImGui::InputInt("Phone", &newserial, false); // false는 쁠마 버튼을 안 보이게 함
-                static char newtitle[64] = ""; ImGui::InputText("Name", newtitle, 64);
+                static int targetphone = 0; ImGui::InputInt("Phone##Rental", &targetphone, false);
+                static int targetserial = 0; ImGui::InputInt("Serial##Rental", &targetserial, false); // false는 쁠마 버튼을 안 보이게 함
                 
+                {
+                    if (ImGui::Button("Rent")) {
+                        unsigned int parsedphone = (unsigned int)(targetphone);
+                        unsigned int parsedserial = (unsigned int)(targetserial);
+                        libsb::Node* phone = session->mCustomerManager->CustomerManager::findPhone(session->mCustomer, parsedphone);
+                        libsb::Node* serial = session->mGameManager->GameManager::findSerial(session->mGame, parsedserial);
+                        
+                        if (phone != nullptr && serial != nullptr) {
+                            if (serial->mIsOnRent == 0) {
+                                serial->mIsOnRent = phone->mID;
+                            } else {
+                                // display as already rented
+                            }
+                        }
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("Retrieve")) {
+                        unsigned int parsedphone = (unsigned int)(targetphone);
+                        unsigned int parsedserial = (unsigned int)(targetserial);
+                        libsb::Node* phone = session->mCustomerManager->CustomerManager::findPhone(session->mCustomer, parsedphone);
+                        libsb::Node* serial = session->mGameManager->GameManager::findSerial(session->mGame, parsedserial);
+                        
+                        if (serial != nullptr) {
+                            if (serial->mIsOnRent != 0) {
+                                serial->mIsOnRent = 0;
+                            } else {
+                                // display as not rented
+                            }
+                            
+                        }
+                    }
+                }
             }
             
             if (ImGui::CollapsingHeader("Customer Call"))
             {
                 ImGui::Text("Enter phone number and name to manage.");
-                static int newphone = 0; ImGui::InputInt("Phone", &newphone, false); // false는 쁠마 버튼을 안 보이게 함
-                static char newname[64] = ""; ImGui::InputText("Name", newname, 64);
+                static int newphone = 0; ImGui::InputInt("Phone##Customer", &newphone, false); // false는 쁠마 버튼을 안 보이게 함
+                static char newname[64] = ""; ImGui::InputText("Name##Customer", newname, 64);
                 
                 {
                     
@@ -237,8 +269,8 @@ int main(int argc, const char * argv[]) {
             if (ImGui::CollapsingHeader("Game Software"))
             {
                 ImGui::Text("Enter phone number and name to manage.");
-                static int newserial = 0; ImGui::InputInt("Phone", &newserial, false); // false는 쁠마 버튼을 안 보이게 함
-                static char newtitle[64] = ""; ImGui::InputText("Name", newtitle, 64);
+                static int newserial = 0; ImGui::InputInt("Serial##Game", &newserial, false); // false는 쁠마 버튼을 안 보이게 함
+                static char newtitle[64] = ""; ImGui::InputText("Title##Game", newtitle, 64);
                 
                 {
                     
@@ -302,7 +334,71 @@ int main(int argc, const char * argv[]) {
             }
             ImGui::End();
         }
-
+        
+        // 5. customer list view
+        ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 600, main_viewport->WorkPos.y + 60), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2(480, 270), ImGuiCond_FirstUseEver);
+        {
+            ImGui::Begin("Customer List");
+            
+            if (ImGui::BeginTable("table1", 2))
+            {
+                int custSize = (int)(session->mCustomer->size());
+                libsb::Node* custIter = session->mCustomer->getHead();
+                
+                for (int row = 0; row < custSize; row++) {
+                    ImGui::TableNextRow();
+                    for (int column = 0; column < 2; column++) {
+                        ImGui::TableSetColumnIndex(column);
+                        if (column == 0) {
+                            ImGui::Text("[%010u]", custIter->mID);
+                        } else if (column == 1) {
+                            ImGui::Text("%s", custIter->mName.c_str());
+                        }
+                    }
+                    custIter = custIter->next;
+                }
+                ImGui::EndTable();
+            }
+            
+            ImGui::End();
+        }
+        
+        // 6. game list view
+        ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 600, main_viewport->WorkPos.y + 390), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2(480, 270), ImGuiCond_FirstUseEver);
+        {
+            ImGui::Begin("Game List");
+            
+            if (ImGui::BeginTable("table2", 3))
+            {
+                int gameSize = (int)(session->mGame->size());
+                libsb::Node* gameIter = session->mGame->getHead();
+                
+                for (int row = 0; row < gameSize; row++) {
+                    ImGui::TableNextRow();
+                    for (int column = 0; column < 3; column++) {
+                        ImGui::TableSetColumnIndex(column);
+                        if (column == 0) {
+                            ImGui::Text("[%010u]", gameIter->mID);
+                        } else if (column == 1) {
+                            ImGui::Text("%s", gameIter->mName.c_str());
+                        } else if (column == 2) {
+                            if (gameIter->mIsOnRent != 0) {
+                                ImGui::Text("rented by [%010u]", gameIter->mIsOnRent);
+                            } else {
+                                ImGui::Text("available");
+                            }
+                        }
+                    }
+                    gameIter = gameIter->next;
+                }
+                ImGui::EndTable();
+            }
+            
+            ImGui::End();
+        }
+        
         // Rendering
         ImGui::Render();
         int display_w, display_h;
