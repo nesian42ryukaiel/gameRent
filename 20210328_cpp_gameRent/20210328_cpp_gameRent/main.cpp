@@ -164,7 +164,7 @@ int main(int argc, const char * argv[]) {
         // 4. My take (Lucas Yew)
         const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 60, main_viewport->WorkPos.y + 60), ImGuiCond_FirstUseEver);
-            ImGui::SetNextWindowSize(ImVec2(480, 600), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2(500, 600), ImGuiCond_FirstUseEver);
         
         {
             ImGui::Begin("Game Store Rent");
@@ -336,8 +336,8 @@ int main(int argc, const char * argv[]) {
         }
         
         // 5. customer list view
-        ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 600, main_viewport->WorkPos.y + 60), ImGuiCond_FirstUseEver);
-            ImGui::SetNextWindowSize(ImVec2(480, 270), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 620, main_viewport->WorkPos.y + 60), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2(600, 270), ImGuiCond_FirstUseEver);
         {
             ImGui::Begin("Customer List");
             
@@ -365,8 +365,8 @@ int main(int argc, const char * argv[]) {
         }
         
         // 6. game list view
-        ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 600, main_viewport->WorkPos.y + 390), ImGuiCond_FirstUseEver);
-            ImGui::SetNextWindowSize(ImVec2(480, 270), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 620, main_viewport->WorkPos.y + 390), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2(600, 270), ImGuiCond_FirstUseEver);
         {
             ImGui::Begin("Game List");
             
