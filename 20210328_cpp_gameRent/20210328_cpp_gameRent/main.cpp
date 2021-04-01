@@ -310,28 +310,6 @@ int main(int argc, const char * argv[]) {
                 }
             }
             
-            ImGui::Text("This is text for testing.");
-            if (ImGui::CollapsingHeader("Help"))
-            {
-                ImGui::Text("ABOUT THIS DEMO:");
-                ImGui::BulletText("Sections below are demonstrating many aspects of the library.");
-                ImGui::BulletText("The \"Examples\" menu above leads to more demo contents.");
-                ImGui::BulletText("The \"Tools\" menu above gives access to: About Box, Style Editor,\n"
-                                  "and Metrics/Debugger (general purpose Dear ImGui debugging tool).");
-                ImGui::Separator();
-
-                ImGui::Text("PROGRAMMER GUIDE:");
-                ImGui::BulletText("See the ShowDemoWindow() code in imgui_demo.cpp. <- you are here!");
-                ImGui::BulletText("See comments in imgui.cpp.");
-                ImGui::BulletText("See example applications in the examples/ folder.");
-                ImGui::BulletText("Read the FAQ at http://www.dearimgui.org/faq/");
-                ImGui::BulletText("Set 'io.ConfigFlags |= NavEnableKeyboard' for keyboard controls.");
-                ImGui::BulletText("Set 'io.ConfigFlags |= NavEnableGamepad' for gamepad controls.");
-                ImGui::Separator();
-
-                ImGui::Text("USER GUIDE:");
-                ImGui::ShowUserGuide();
-            }
             ImGui::End();
         }
         
@@ -341,19 +319,32 @@ int main(int argc, const char * argv[]) {
         {
             ImGui::Begin("Customer List");
             
-            if (ImGui::BeginTable("table1", 2))
+            if (ImGui::BeginTable("table1", 3))
             {
                 int custSize = (int)(session->mCustomer->size());
                 libsb::Node* custIter = session->mCustomer->getHead();
                 
                 for (int row = 0; row < custSize; row++) {
                     ImGui::TableNextRow();
-                    for (int column = 0; column < 2; column++) {
+                    for (int column = 0; column < 3; column++) {
                         ImGui::TableSetColumnIndex(column);
                         if (column == 0) {
                             ImGui::Text("[%010u]", custIter->mID);
                         } else if (column == 1) {
                             ImGui::Text("%s", custIter->mName.c_str());
+                        } else if (column == 2) {
+                            // 배열로 특정 전화번호에 rent된 모든 게임을 for문과 Node 포인터 배열을 이용해 표시
+                            libsb::List* rented = new libsb::List();
+                            for (libsb::Node* iterator = session->mGame->getHead(); iterator != nullptr; iterator = iterator->next) {
+                                if (iterator->mIsOnRent == custIter->mID) {
+                                    rented->push_back(iterator->mID, iterator->mName, iterator->mIsHuman, iterator->mIsOnRent);
+                                }
+                            }
+                            for (libsb::Node* iterator = rented->getHead(); iterator != nullptr; iterator = iterator->next) {
+                                ImGui::Text("[%010u] %s", iterator->mID, iterator->mName.c_str());
+                            }
+                            delete rented;
+                            rented = nullptr;
                         }
                     }
                     custIter = custIter->next;
