@@ -18,9 +18,9 @@ CustomerManager::~CustomerManager() {
 void CustomerManager::signup(libsb::List* customer, unsigned int id, std::string name) {
     if (customer != nullptr) {
         customer->push_back(id, name, true, 0);
-        std::cout << "[DEBUG_M]: A new customer signed up.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: A new customer signed up.\n" << std::endl;
     } else {
-        std::cout << "[DEBUG_M]: Signup failed.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Signup failed.\n" << std::endl;
     }
 }
 

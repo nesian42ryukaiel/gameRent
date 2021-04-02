@@ -18,9 +18,9 @@ GameManager::~GameManager() {
 void GameManager::stash(libsb::List* game, unsigned int id, std::string name) {
     if (game != nullptr) {
         game->push_back(id, name, false, 0);
-        std::cout << "[DEBUG_M]: A new game title was stashed.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: A new game title was stashed.\n" << std::endl;
     } else {
-        std::cout << "[DEBUG_M]: Stashing failed.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Stashing failed.\n" << std::endl;
     }
 }
 

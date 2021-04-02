@@ -22,7 +22,7 @@ void FileRW::loadCustomer(libsb::List* customer) {
     if (customer == nullptr) {
         customer = new libsb::List();
     } else {
-        std::cout << "[DEBUG_M]: Customer list already loaded.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Customer list already loaded.\n" << std::endl;
     }
     
     if (loadedCustomer == false) {
@@ -44,9 +44,9 @@ void FileRW::loadCustomer(libsb::List* customer) {
         
         loadedCustomer = true;
         
-        std::cout << "[DEBUG_M]: Customer data safely loaded.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Customer data safely loaded.\n" << std::endl;
     } else {
-        std::cout << "[DEBUG_M]: Customer data already loaded.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Customer data already loaded.\n" << std::endl;
     }
     
 }
@@ -85,10 +85,10 @@ void FileRW::saveCustomer(libsb::List* customer) {
         
         fclose(fp);
         
-        std::cout << "[DEBUG_M]: Customer data safely stored.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Customer data safely stored.\n" << std::endl;
         // delete customer;
     } else {
-        std::cout << "[DEBUG_M]: Nothing to save.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Nothing to save.\n" << std::endl;
     }
 }
 
@@ -96,7 +96,7 @@ void FileRW::loadGame(libsb::List* game) {
     if (game == nullptr) {
         game = new libsb::List();
     } else {
-        std::cout << "[DEBUG_M]: Game list already loaded.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Game list already loaded.\n" << std::endl;
     }
     
     if (loadedGame == false) {
@@ -118,9 +118,9 @@ void FileRW::loadGame(libsb::List* game) {
         
         loadedGame = true;
         
-        std::cout << "[DEBUG_M]: Game data safely loaded.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Game data safely loaded.\n" << std::endl;
     } else {
-        std::cout << "[DEBUG_M]: Game data already loaded.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Game data already loaded.\n" << std::endl;
     }
     
 }
@@ -159,9 +159,9 @@ void FileRW::saveGame(libsb::List* game) {
         
         fclose(fp);
         
-        std::cout << "[DEBUG_M]: Game data safely stored.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Game data safely stored.\n" << std::endl;
         // delete game;
     } else {
-        std::cout << "[DEBUG_M]: Nothing to save.\n" << std::endl;
+        //std::cout << "[DEBUG_M]: Nothing to save.\n" << std::endl;
     }
 }

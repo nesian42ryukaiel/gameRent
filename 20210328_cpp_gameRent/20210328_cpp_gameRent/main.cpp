@@ -247,6 +247,7 @@ int main(int argc, const char * argv[]) {
                         libsb::Node* name = session->mCustomerManager->CustomerManager::findName(session->mCustomer, parsedname);
                         if (phone != nullptr && phone == name) {
                             session->mCustomerManager->CustomerManager::viewIndividual(session->mCustomer, phone);
+                            // popup으로 띄워 직접 보여주기
                         }
                     }
                     ImGui::SameLine();
@@ -291,6 +292,7 @@ int main(int argc, const char * argv[]) {
                         libsb::Node* title = session->mGameManager->GameManager::findTitle(session->mGame, parsedtitle);
                         if (serial != nullptr && serial == title) {
                             session->mGameManager->GameManager::viewGame(session->mCustomer, serial);
+                            // popup으로 띄워 직접 보여주기
                         }
                     }
                     ImGui::SameLine();

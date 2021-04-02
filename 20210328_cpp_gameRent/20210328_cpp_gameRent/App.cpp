@@ -373,7 +373,7 @@ App::App() {
     mCustomerManager = new CustomerManager();
     mGameManager = new GameManager();
     
-    std::cout << "[DEBUG_M]: Zoom\n" << std::endl;
+    //std::cout << "[DEBUG_M]: Zoom\n" << std::endl;
 }
 
 App::~App() {
@@ -407,6 +407,6 @@ App::~App() {
         delete instance;
         instance = nullptr;
     }
-    std::cout << "[DEBUG_M]: pooF\n" << std::endl;
+    //std::cout << "[DEBUG_M]: pooF\n" << std::endl;
 
 }
