@@ -105,8 +105,6 @@ int main(int argc, const char * argv[]) {
     //IM_ASSERT(font != NULL);
 
     // Our state
-    bool show_demo_window = false;
-    bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     // Main loop
@@ -124,50 +122,15 @@ int main(int argc, const char * argv[]) {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-        if (show_demo_window)
-            ImGui::ShowDemoWindow(&show_demo_window);
-
-        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
-//        {
-//            static float f = 0.0f;
-//            static int counter = 0;
-//
-//            ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-//
-//            ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-//            ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-//            ImGui::Checkbox("Another Window", &show_another_window);
-//
-//            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-//            ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-//
-//            if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-//                counter++;
-//            ImGui::SameLine();
-//            ImGui::Text("counter = %d", counter);
-//
-//            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-//            ImGui::End();
-//        }
-
-        // 3. Show another simple window.
-        if (show_another_window)
-        {
-            ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-            ImGui::Text("Hello from another window!");
-            if (ImGui::Button("Close Me"))
-                show_another_window = false;
-            ImGui::End();
-        }
-        
-        // 4. My take (Lucas Yew)
+        // 1. My take (Lucas Yew)
         const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 60, main_viewport->WorkPos.y + 60), ImGuiCond_FirstUseEver);
             ImGui::SetNextWindowSize(ImVec2(500, 600), ImGuiCond_FirstUseEver);
         
         {
             ImGui::Begin("Game Store Rent");
+            
+            ImGui::Text("Welcome! Start by loading data in Data Management.");
             
             if (ImGui::CollapsingHeader("Data Management"))
             {
@@ -220,6 +183,7 @@ int main(int argc, const char * argv[]) {
                         }
                     }
                 }
+                
             }
             
             if (ImGui::CollapsingHeader("Customer Call"))
@@ -240,17 +204,6 @@ int main(int argc, const char * argv[]) {
                         }
                     }
                     ImGui::SameLine();
-                    if (ImGui::Button("View##Customer")) {
-                        unsigned int parsedphone = (unsigned int)(newphone);
-                        std::string parsedname(newname);
-                        libsb::Node* phone = session->mCustomerManager->CustomerManager::findPhone(session->mCustomer, parsedphone);
-                        libsb::Node* name = session->mCustomerManager->CustomerManager::findName(session->mCustomer, parsedname);
-                        if (phone != nullptr && phone == name) {
-                            session->mCustomerManager->CustomerManager::viewIndividual(session->mCustomer, phone);
-                            // popup으로 띄워 직접 보여주기
-                        }
-                    }
-                    ImGui::SameLine();
                     if (ImGui::Button("Unsign##Customer")) {
                         unsigned int parsedphone = (unsigned int)(newphone);
                         std::string parsedname(newname);
@@ -261,10 +214,7 @@ int main(int argc, const char * argv[]) {
                         }
                     }
                 }
-                if (ImGui::Button("TestPrint")) { // move this around for testing list status
-                    session->mCustomer->print(0);
-                    session->mGame->print(0);
-                }
+                
             }
             
             if (ImGui::CollapsingHeader("Game Software"))
@@ -285,17 +235,6 @@ int main(int argc, const char * argv[]) {
                         }
                     }
                     ImGui::SameLine();
-                    if (ImGui::Button("View##Game")) {
-                        unsigned int parsedserial = (unsigned int)(newserial); // static cast로 변경..할 예정
-                        std::string parsedtitle(newtitle);
-                        libsb::Node* serial = session->mGameManager->GameManager::findSerial(session->mGame, parsedserial);
-                        libsb::Node* title = session->mGameManager->GameManager::findTitle(session->mGame, parsedtitle);
-                        if (serial != nullptr && serial == title) {
-                            session->mGameManager->GameManager::viewGame(session->mCustomer, serial);
-                            // popup으로 띄워 직접 보여주기
-                        }
-                    }
-                    ImGui::SameLine();
                     if (ImGui::Button("Dispose##Game")) {
                         unsigned int parsedserial = (unsigned int)(newserial); // static cast로 변경..할 예정
                         std::string parsedtitle(newtitle);
@@ -306,16 +245,13 @@ int main(int argc, const char * argv[]) {
                         }
                     }
                 }
-                if (ImGui::Button("TestPrint")) { // move this around for testing list status
-                    session->mCustomer->print(0);
-                    session->mGame->print(0);
-                }
+                
             }
             
             ImGui::End();
         }
         
-        // 5. customer list view
+        // 2. customer list view
         ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 620, main_viewport->WorkPos.y + 60), ImGuiCond_FirstUseEver);
             ImGui::SetNextWindowSize(ImVec2(600, 270), ImGuiCond_FirstUseEver);
         {
@@ -357,7 +293,7 @@ int main(int argc, const char * argv[]) {
             ImGui::End();
         }
         
-        // 6. game list view
+        // 3. game list view
         ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 620, main_viewport->WorkPos.y + 390), ImGuiCond_FirstUseEver);
             ImGui::SetNextWindowSize(ImVec2(600, 270), ImGuiCond_FirstUseEver);
         {
