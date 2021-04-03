@@ -241,7 +241,7 @@ int main(int argc, const char * argv[]) {
                         libsb::Node* serial = session->mGameManager->GameManager::findSerial(session->mGame, parsedserial);
                         libsb::Node* title = session->mGameManager->GameManager::findTitle(session->mGame, parsedtitle);
                         if (serial != nullptr && title != nullptr) {
-                            session->mGameManager->GameManager::dispose(session->mCustomer, serial);
+                            session->mGameManager->GameManager::dispose(session->mGame, serial);
                         }
                     }
                 }
@@ -274,7 +274,7 @@ int main(int argc, const char * argv[]) {
                             // 배열로 특정 전화번호에 rent된 모든 게임을 for문과 Node 포인터 배열을 이용해 표시
                             libsb::List* rented = new libsb::List();
                             for (libsb::Node* iterator = session->mGame->getHead(); iterator != nullptr; iterator = iterator->next) {
-                                if (iterator->mIsOnRent == custIter->mID) {
+                                if (iterator != nullptr && iterator->mIsOnRent == custIter->mID) {
                                     rented->push_back(iterator->mID, iterator->mName, iterator->mIsHuman, iterator->mIsOnRent);
                                 }
                             }

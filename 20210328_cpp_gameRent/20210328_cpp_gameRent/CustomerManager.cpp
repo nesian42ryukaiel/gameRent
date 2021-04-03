@@ -50,6 +50,8 @@ void CustomerManager::viewIndividual(libsb::List* customer, libsb::Node* individ
 void CustomerManager::unsign(libsb::List* customer, libsb::Node* individual) {
     if (customer != nullptr && individual != nullptr) {
         customer->remove(individual);
+        if (individual != nullptr)
+            individual = nullptr;
     }
 }
 

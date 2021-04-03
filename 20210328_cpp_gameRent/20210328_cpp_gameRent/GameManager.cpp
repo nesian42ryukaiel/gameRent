@@ -49,6 +49,8 @@ void GameManager::viewGame(libsb::List* game, libsb::Node* soft) {
 void GameManager::dispose(libsb::List* game, libsb::Node* soft) {
     if (game != nullptr && soft != nullptr) {
         game->remove(soft);
+        if (soft != nullptr)
+            soft = nullptr;
     }
 }
 
